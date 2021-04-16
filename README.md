@@ -13,59 +13,53 @@ A list of lane names should be in a text file with one name per line, these refe
 
 1. Initial preprocessing trims Illumina adapters and filters based on both sliding window and average quality scores, combines paired reads with a minimum overlap. The percentage of reads surviving trimming and read combining can be found in the data folder, labeled as 'preprocessingQC.csv'
 
-  `export dataLocation=./R4-adam
-  export laneListFile=R4-laneList.txt`
-
+  `export dataLocation=./RawFiles-directory`<br>
+  `export laneListFile=SamplesList.txt`<br>
   `bash 01preprocessing-QC-automated.sh -export=dataLocation -export=laneListFile`
-
-  `dependencies
-01PID-dloop-preprocessing-QC.sh
-01preprocessing-QC-automated.sh`
-
 <br><br>
+dependencies<br>
+`01PID-dloop-preprocessing-QC.sh`<br>
+`01preprocessing-QC-automated.sh`<br>
+
+<br>
 
 2. Barcoded reads are grouped together and aligned for subsequent analysis step, all barcodes with only one read present are not grouped and are appended to the file 'group0.txt'.  All sequences without a recognizable ID can be found in the file 'mutated.txt'
 
- `export dataLocation=./R4-adam
-  export laneListFile=R4-laneList-1.txt`
-
+  `export dataLocation=./RawFiles-directory`<br>
+  `export laneListFile=SamplesList.txt`<br>
  `bash 02automated-wrapper-v1.sh -export=dataLocation -export=laneListFile`
-
-  `dependencies
-02MIDgrouping-v1.sh
-02parseGroups-v1.py`
+<br><br>
+dependencies<br>
+`02MIDgrouping-v1.sh`<br>
+`02parseGroups-v1.py`<br><br>
 
 By default python multiprocessing is turned on (using 'multiprocessing' library)
 <br><br>
 
 3. The number of constituent reads for each strand consensus are summarized in the file 'groupSizesSummary.csv'. This is used to ensure there was sufficient amplification and that there is an even distribution of reads across strand consensuses.
 
- `export dataLocation=./R4-adam
-  export laneListFile=R4-laneList-1.txt`
-
+  `export dataLocation=./RawFiles-directory`<br>
+  `export laneListFile=SamplesList.txt`<br>
  `bash 03automated-groupSizeParse-v1.sh -export=dataLocation -export=laneListFile`
-
-  `dependencies
-03parseGroupSizes-v1.py`
+<br><br>
+dependencies<br>
+`03parseGroupSizes-v1.py`
 
 <br><br>
 
 4. Mutation calling parses low level mutations, only accepting valid sequences if the number of reads in a barcoded group is above a threshold (default=5), and if the consensus within the group is above a threshold (default=75%).  The cambridge reference sequence (NC_012920) can be obtained [here](https://www.ncbi.nlm.nih.gov/nuccore/251831106), for this purpose positions 16559-279 was used
 
- `export dataLocation=./R4-adam
-export laneListFile=R4-laneList-1.txt
-export outputFileName=Example-outputFile-`
+  `export dataLocation=./RawFiles-directory`<br>
+  `export laneListFile=SamplesList.txt`<br>
+  `export outputFileName=Example-outputFile-`<br><br>
 
 Default reversion of ambiguous bases to wild type allele
 Default minimum constituent read group size and mutation frequency threshold are set to 5 and 0.75 respectively
 
-`bash 04automated-writeMutations-v1.sh -export=laneListFile -export=dataLocation -export=outputFileName`
-
-`dependencies
-04writeMutations-v1.py`
-
-
-
+`bash 04automated-writeMutations-v1.sh -export=laneListFile -export=dataLocation -export=outputFileName`<br><br>
+dependencies<br>
+`04writeMutations-v1.py`
+<br><br>
 
 --------------------
 
