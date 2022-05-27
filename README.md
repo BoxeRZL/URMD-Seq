@@ -5,28 +5,31 @@ This repository is a self contained analysis pipeline for targetted mitochondria
 
 <br>
 Dependencies: Python/3.7.0 Biopython/1.75, Mafft/2.6, Trimmomatic/0.39, FLASH/1.2.11
-
-Data set up requirements:
+<br><br>
+Data set up requirements: <br>
 A list of lane names should be in a text file with one name per line, these refer to the identifier preceeding `\_R\*\_001.fastq` in the raw fastq files. This allows for automated analysis of all lanes.
-
+<br><br>
 All analyses are performed using Compute Canada with modules:
-  `StdEnv/2018.3`
-  `mafft python/3.7 trimmomatic`
+`StdEnv/2018.3`
+`mafft python/3.7 trimmomatic`
+<br><br>
+
 ----------------------
+
 
 Configuration file:
 
-runName=RX*
-dataLocation=RX_sequencingData
-laneListFile=RX-laneList.txt**
-trimThreshold=30***
-FlashThreshold=5****
-outputFileName=RX-mutations
+`runName=RX`\*<br>
+`dataLocation=RX_sequencingData`<br>
+`laneListFile=RX-laneList.txt`\*\*<br>
+`trimThreshold=30`\*\*\*<br>
+`FlashThreshold=5`****<br>
+`outputFileName=RX-mutations`
 
-*Where ‘X’ is the run number (ie. R5), and dataLocation is the folder where the fastq files are (ie R5_sequencingData)
-**text file with lane names
-***Trim threshold is the minimum quality score that is acceptable during trimming, 30 is the default, may be increased for more stringency or decreased if the run data is of low quality (Trimmomatic, http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf )
-****Flash threshold is the minimum overlap required between the forward and reverse reads, for R5 and R6 it was 5 and for R4 it was 30 (FLASH, http://ccb.jhu.edu/software/FLASH/MANUAL )
+\*Where ‘X’ is the run number (ie. R5), and dataLocation is the folder where the fastq files are (ie R5_sequencingData)<br>
+\*\*text file with lane names<br>
+\*\*\*Trim threshold is the minimum quality score that is acceptable during trimming, 30 is the default, may be increased for more stringency or decreased if the run data is of low quality (Trimmomatic, http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf )<br>
+\*\*\*\*Flash threshold is the minimum overlap required between the forward and reverse reads, for R5 and R6 it was 5 and for R4 it was 30 (FLASH, http://ccb.jhu.edu/software/FLASH/MANUAL )<br>
 
 ----------------------
 
