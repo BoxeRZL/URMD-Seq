@@ -9,12 +9,14 @@ Contact: Rachel Dunn (rachel.dunn@bcchr.ca)
 This repository is a self contained analysis pipeline for targetted mitochondrial d-loop sequencing using a unique primer barcoding technique.  This pipeline takes Illumina 2X300 paired reads fastq files, spanning the d-loop region of the mitochondrial DNA (M:16559-279).  
 
 <br>
-Dependencies: Python/3.7.0 Biopython/1.75, Mafft/2.6, Trimmomatic/0.39, FLASH/1.2.11
+Dependencies: Python/3.7.0, Biopython/1.75, Mafft/2.6, Trimmomatic/0.39, FLASH/1.2.11
 <br><br>
-Data set up requirements: <br>
-A list of lane names should be in a text file with one name per line, these refer to the identifier preceeding `\_R\*\_001.fastq` in the raw fastq files. This allows for automated analysis of all lanes.
+
+Data formatting requirements: <br>
+
+All data should be in raw fastq format with the suffix `\_RX\_001.fastq` , for automated analysis a text file is created containing a list of all lane names (preceeding `\_RX\_001.fastq`)
 <br><br>
-All analyses are performed using Compute Canada with modules:
+All analyses are performed using Compute Canada, with slurm and modules:
 `StdEnv/2018.3`
 `mafft python/3.7 trimmomatic`
 <br><br>
@@ -50,7 +52,7 @@ dependencies<br>
 
 <br>
 
-2. Barcoded reads are grouped together and aligned for subsequent analysis step, all barcodes with only one read present are not grouped and are appended to the file 'group0.txt'.  All sequences without a recognizable ID can be found in the file 'mutated.txt'
+2. Barcoded reads are grouped together and aligned for subsequent analysis step. All barcodes with only one read present are not grouped and are appended to the file 'group0.txt'.  All sequences without a recognizable ID can be found in the file 'mutated.txt'. All group files are zipped. <br>
 sbatch parameters specified in `02sbatch-MIDgrouping-R9patch-clean.sh` edit as necessary
 
   `bash 02automated-wrapper-R9patch-clean.sh ./config.fileRX`
@@ -69,6 +71,7 @@ By default python multiprocessing is turned on (using 'multiprocessing' library)
 <br><br>
 dependencies<br>
 `03parseGroupSizes.py`
+
 
 <br><br>
 
