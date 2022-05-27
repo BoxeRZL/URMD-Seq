@@ -1,4 +1,9 @@
 # dloop-PID: Mitochondrial d-loop Primer ID Sequencing
+
+--------------
+
+Contact: Rachel Dunn (rachel.dunn@bcchr.ca)
+
 --------------
 
 This repository is a self contained analysis pipeline for targetted mitochondrial d-loop sequencing using a unique primer barcoding technique.  This pipeline takes Illumina 2X300 paired reads fastq files, spanning the d-loop region of the mitochondrial DNA (M:16559-279).  
