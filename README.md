@@ -16,7 +16,7 @@ Data formatting requirements: <br>
 
 All data should be in raw fastq format with the suffix `\_RX\_001.fastq` , for automated analysis a text file is created containing a list of all lane names (preceeding `\_RX\_001.fastq`)
 <br><br>
-All analyses are performed using Compute Canada, with slurm and modules:
+All analyses are performed using Digital Research Alliance Canada (used called Compute Canada), with slurm and modules:
 `StdEnv/2018.3`
 `mafft python/3.7 trimmomatic`
 <br><br>
