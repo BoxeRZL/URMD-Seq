@@ -2,7 +2,7 @@
 
 --------------
 
-Contact: Rachel Dunn (rachel.dunn@bcchr.ca)
+Contact: Zeshuo Li (zesli@student.ubc.ca)
 
 --------------
 
