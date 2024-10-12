@@ -2,7 +2,7 @@
 
 --------------
 
-Contact: Zeshuo Li (zesli@student.ubc.ca)
+Contact: Zeshuo Li (lizeshuo99@126.com)
 
 --------------
 
