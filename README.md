@@ -42,7 +42,7 @@ Configuration file:
 ----------------------
 
 
-1.Trim sequencing adapters of Illumina and filter out reads with poor-quality bases and then combine paired reads on a minimum length of overlap. The default settings are specified in the configuration file ‘config.fileRX’. The reads surviving of trimming and combining are counts in percentages for quality control and can be found in an output file labeled as ‘preprocessingQC.csv’ in the data location folder (see Box2 for interpretations of quality control parameters).
+1. Trim sequencing adapters of Illumina and filter out reads with poor-quality bases and then combine paired reads on a minimum length of overlap. The default settings are specified in the configuration file ‘config.fileRX’. The reads surviving of trimming and combining are counts in percentages for quality control and can be found in an output file labeled as ‘preprocessingQC.csv’ in the data location folder (see Box2 for interpretations of quality control parameters).
 
 
   `bash 01preprocessing-QC-automated.sh ./config.fileRX`
@@ -53,7 +53,7 @@ dependencies<br>
 
 <br>
 
-2.Group barcoded reads with same UMI into a family. All UMI barcodes with the presence of less than two reads are not grouped and are appended to an output file labeled as ‘ungrouped.txt’. All reads without a recognizable UMI are listed in an output file labeled as ‘mutated.txt’.  An initial alignment is processed between reads within a family to generate a family consensus which is appended to an output file labeled as ‘Consensus.aln’. The number of reads in each family is calculated into an output file labeled as 'groupsize.csv' for subsequent analysis steps. <br>
+2. Group barcoded reads with same UMI into a family. All UMI barcodes with the presence of less than two reads are not grouped and are appended to an output file labeled as ‘ungrouped.txt’. All reads without a recognizable UMI are listed in an output file labeled as ‘mutated.txt’.  An initial alignment is processed between reads within a family to generate a family consensus which is appended to an output file labeled as ‘Consensus.aln’. The number of reads in each family is calculated into an output file labeled as 'groupsize.csv' for subsequent analysis steps. <br>
 sbatch parameters specified in `02sbatch-MIDgrouping-R9patch-clean.sh` edit as necessary
 
   `bash 02automated-wrapper-R9patch-clean.sh ./config.fileRX`
@@ -66,7 +66,7 @@ dependencies<br>
 By default python multiprocessing is turned on (using 'multiprocessing' library)
 <br><br>
 
-3.Summarize the number of constituent reads among all families in an output file labeled as ‘groupSizesSummary.csv’. This is used to indicate whether there was sufficient amplification for quality control.
+3. Summarize the number of constituent reads among all families in an output file labeled as ‘groupSizesSummary.csv’. This is used to indicate whether there was sufficient amplification for quality control.
 
   `bash 03automated-groupSizeParse.sh ./config.fileRX`
 <br><br>
