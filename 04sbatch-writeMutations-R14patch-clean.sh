@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=4000M
 
-#SBATCH --job-name=R5-Jan2021Analysis
-#SBATCH --mail-user=racheld3141@gmail.com
+#SBATCH --job-name=R12-Analysis-zesli
+#SBATCH --mail-user=lizeshuo99@gmail.com
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
@@ -18,6 +18,6 @@ pip install biopython
 echo $laneName
 echo $WTadjustedFlag
 
-python 04writeMutations-multiprocessing-clean.py $dataLocation/$laneName-$trimThreshold-$FlashThreshold 5 0.75 00cambridgeRefLong.txt $dataLocation $outputFileName $laneName- $WTadjustedFlag
+python 04writeMutations-multiprocessing-R14patch-clean.py $dataLocation/$laneName-$trimThreshold-$FlashThreshold 5 0.75 00cambridgeRefLong.txt $dataLocation $outputFileName $laneName- $WTadjustedFlag
 
 echo "Done"

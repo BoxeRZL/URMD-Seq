@@ -15,7 +15,7 @@ do
 	export outputFileName=$outputFileName
 	export trimThreshold=$trimThreshold
 	export FlashThreshold=$FlashThreshold
-	sbatch 04sbatch-writeMutations-clean.sh -export=laneName -export=dataLocation -export=outputFileName -export=WTadjustedFlag -export=trimThreshold -export=FlashThreshold
+	sbatch 04sbatch-writeMutations-R14patch-clean.sh -export=laneName -export=dataLocation -export=outputFileName -export=WTadjustedFlag -export=trimThreshold -export=FlashThreshold
 done
 
 echo "Done"
