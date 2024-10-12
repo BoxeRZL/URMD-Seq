@@ -1,4 +1,4 @@
-# dloop-PID: Mitochondrial d-loop Primer ID Sequencing
+# UMI-DloopSeq: Mitochondrial d-loop UMI based Sequencing
 
 --------------
 
