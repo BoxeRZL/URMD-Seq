@@ -14,18 +14,18 @@ cat $laneListFile | while read Sample
 do
 	bash 01PID-dloop-preprocessing-QC.sh $Sample $dataLocation $trimThreshold $FlashThreshold -m $inputSuffix
 
-	RP=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $4}')
-	BSR=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $7}')
-	BSP=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $8}' | awk '{print substr($0, 2, length($0) - 2)}')
+	RP=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $4}')
+	BSR=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $7}')
+	BSP=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $8}' | awk '{print substr($0, 2, length($0) - 2)}')
 
-	FOR=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $12}')
-	FOS=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $13}' | awk '{print substr($0, 2, length($0) - 2)}')
+	FOR=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $12}')
+	FOS=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $13}' | awk '{print substr($0, 2, length($0) - 2)}')
 
-	ROR=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $17}')
-	ROS=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $18}' | awk '{print substr($0, 2, length($0) - 2)}')
+	ROR=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $17}')
+	ROS=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $18}' | awk '{print substr($0, 2, length($0) - 2)}')
 
-	DR=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $20}')
-	DS=$(awk '{if(NR==4) print $0}' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $21}' | awk '{print substr($0, 2, length($0) - 2)}')
+	DR=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $20}')
+	DS=$(grep -n 'Input Read Pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $21}' | awk '{print substr($0, 2, length($0) - 2)}')
 
 	TPR=$(grep -n 'Total pairs:' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $4}')
 	CPR=$(grep -n 'Combined pairs' $dataLocation/$Sample-$trimThreshold-$FlashThreshold-$inputSuffix | awk '{print $4}')
