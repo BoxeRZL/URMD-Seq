@@ -79,7 +79,8 @@ dependencies<br>
 4. Mutation calling parses low level mutations, only accepting valid sequences if the number of reads in a barcoded group is above a threshold (default=5), and if the consensus within the group is above a threshold (default=75%).  The cambridge reference sequence (NC_012920) can be obtained [here](https://www.ncbi.nlm.nih.gov/nuccore/251831106), for this purpose positions 16559-279 was used
 
   `bash 04automated-writeMutations-clean.sh ./config.fileRX`<br><br>
-
+  `bash 04merge-worker-outputs.sh`<br><br>
+  
 dependencies<br>
 `04sbatch-writeMutations-clean.sh`
 `04writeMutations-multiprocessing-clean.py`
