@@ -44,6 +44,7 @@ def main():
         p.start()
     print(str(jobs))
 
+
     print("all fn complete")
 
 
@@ -128,17 +129,18 @@ def adjWT(filepath, groupNo, grpSizeThreshold, consThreshold, mid, refSeqStr, an
     return 0
 
 
+
 def mutPrint(filepath, mid, rawFile, outPath, processingVar):
-    posn = 16533  # refseq before start site -1 for zero indexing in python. ***ln 112 check indexing
+    posn = 16533  # refseq before start site -1 for zero indexing in python
     chrSize = 16568  # mtDNA size (16568)-1 for zero indexing
     insert = 0
 
-    posnMin = 34
-    posnMax = 254
-
     refAlignment = AlignIO.read(filepath + rawFile, "fasta")
 
-    outputFile = open(outPath, 'a')
+    # Generate unique filename for multiprocessing-safe writing
+    pid = os.getpid() # Process ID: a unique ID that prevent overlapping leading to garbled or misaligned rows
+    outFilePath = f"{outPath}.worker_{pid}.csv"
+    outputFile = open(outFilePath, 'a')
 
     for base in range(0, len(refAlignment[0])):
         if refAlignment[0][base] == "-":
@@ -156,32 +158,36 @@ def mutPrint(filepath, mid, rawFile, outPath, processingVar):
 
         coverage = a + t + c + g + n + indel
 
-        if not ((a / coverage == 1) or (t / coverage == 1) or (c / coverage == 1) or (g / coverage == 1) or (n / coverage == 1) or (indel / coverage == 1)):
+        if ((a / coverage == 1) or (t / coverage == 1) or (c / coverage == 1) or (g / coverage == 1) or (n / coverage == 1) or (indel / coverage == 1)):
+            continue
 
-            if posn == 0:
-                posn = int(chrSize) + 1
+        if posn == 0:
+            posn = int(chrSize) + 1
 
-            outputFile.write(",".join([str(processingVar), str(((posn + (0.001 * insert)) % chrSize)), str(mid), str(refAlignment[0][base]), str(coverage), str(a), str(t), str(c), str(g), str(n), str(indel)]))
+        wtBases = max(a, t, c, g)
 
-            posnAgreement = 0
-            if a > 0: posnAgreement += 1
-            if t > 0: posnAgreement += 1
-            if c > 0: posnAgreement += 1
-            if g > 0: posnAgreement += 1
-            wtBases = 0
+        outputFile.write(",".join([
+            str(processingVar),
+            str(((posn + (0.001 * insert)) % chrSize)),
+            str(mid),
+            str(refAlignment[0][base]),
+            str(coverage),
+            str(a), str(t), str(c), str(g), str(n), str(indel),
+            str(coverage - n - indel - wtBases)
+        ]))
 
-            wtBases = max(a, t, c, g)
-            outputFile.write("," + str(coverage - n - indel - wtBases))
+        if insert == 0:
+            outputFile.write(",1")
+        else:
+            outputFile.write(",")
 
-            if insert == 0:
-                outputFile.write(",1")
-            else:
-                outputFile.write(",")
-
-            outputFile.write("\n")
+        outputFile.write("\n")
 
     outputFile.close()
+
+
     print("# groups:    " + str(len(refAlignment[1:, 1])))
+
 
 
 if __name__ == '__main__':
