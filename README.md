@@ -1,4 +1,4 @@
-# UMI-DloopSeq: Mitochondrial d-loop UMI based Sequencing
+# URMD-Seq: a high-throughput method for scalable detection of ultra-rare mutations in the human mitochondrial genome
 
 --------------
 
